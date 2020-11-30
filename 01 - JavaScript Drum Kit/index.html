@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">jeszcze jak</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound"> z warkoczykami...</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">jest możliwe</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">no jak PJ powiedział?</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">tak jak PJ powiedział</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">co mam robić?</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">bardzo</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Tsooo</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Noooo</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="jpSounds/jeszczeJak.mp3"></audio>
+  <audio data-key="83" src="jpSounds/warkoczykami.mp3"></audio>
+  <audio data-key="68" src="jpSounds/jestMozliwe.mp3"></audio>
+  <audio data-key="70" src="jpSounds/noJPpowiedzial.mp3"></audio>
+  <audio data-key="71" src="jpSounds/takJPpoweidzial.mp3"></audio>
+  <audio data-key="72" src="jpSounds/coMamRobic.mp3"></audio>
+  <audio data-key="74" src="jpSounds/Bardzo.mp3"></audio>
+  <audio data-key="75" src="jpSounds/Tsooo.mp3"></audio>
+  <audio data-key="76" src="jpSounds/NooOO.mp3"></audio>
+
+<script>
+  window.addEventListener('keydown', function(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+    if(!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add('playing')
+  })
+
+  function removeTransition(e){
+    if(e.propertyName !== 'transform') return; // skip it if it's not a transform
+    console.log(e.propertyName)
+        setTimeout(() => {
+          this.classList.remove('playing')
+        }, 1700
+    );
+
+  }
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition))
+  
+</script>
+
+
+</body>
+</html>
